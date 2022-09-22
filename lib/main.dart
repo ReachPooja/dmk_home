@@ -1,6 +1,6 @@
 import 'package:dmk_home/app/app.dart';
-import 'package:flutter/material.dart';
+import 'package:dmk_home/bootstrap.dart';
 
 void main() {
-  runApp(const MyApp());
+  bootstrap(() => const MyApp());
 }
