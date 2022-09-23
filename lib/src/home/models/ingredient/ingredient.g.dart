@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ingredients.dart';
+part of 'ingredient.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class IngredientsAdapter extends TypeAdapter<Ingredients> {
+class IngredientAdapter extends TypeAdapter<Ingredient> {
   @override
   final int typeId = 4;
 
   @override
-  Ingredients read(BinaryReader reader) {
+  Ingredient read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Ingredients(
+    return Ingredient(
       quantity: fields[0] as String,
       name: fields[1] as String,
       unit: fields[2] as String,
@@ -27,7 +27,7 @@ class IngredientsAdapter extends TypeAdapter<Ingredients> {
   }
 
   @override
-  void write(BinaryWriter writer, Ingredients obj) {
+  void write(BinaryWriter writer, Ingredient obj) {
     writer
       ..writeByte(6)
       ..writeByte(0)
@@ -50,7 +50,7 @@ class IngredientsAdapter extends TypeAdapter<Ingredients> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is IngredientsAdapter &&
+      other is IngredientAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -59,7 +59,7 @@ class IngredientsAdapter extends TypeAdapter<Ingredients> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Ingredients _$IngredientsFromJson(Map<String, dynamic> json) => Ingredients(
+Ingredient _$IngredientFromJson(Map<String, dynamic> json) => Ingredient(
       quantity: json['quantity'] as String? ?? '',
       name: json['name'] as String? ?? '',
       unit: json['unit'] as String? ?? '',
@@ -68,7 +68,7 @@ Ingredients _$IngredientsFromJson(Map<String, dynamic> json) => Ingredients(
       productId: json['product_id'] as int? ?? 0,
     );
 
-Map<String, dynamic> _$IngredientsToJson(Ingredients instance) =>
+Map<String, dynamic> _$IngredientToJson(Ingredient instance) =>
     <String, dynamic>{
       'quantity': instance.quantity,
       'name': instance.name,

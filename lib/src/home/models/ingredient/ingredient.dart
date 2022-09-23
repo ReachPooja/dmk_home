@@ -2,12 +2,12 @@ import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'ingredients.g.dart';
+part 'ingredient.g.dart';
 
 @HiveType(typeId: 4)
 @JsonSerializable()
-class Ingredients extends Equatable {
-  const Ingredients({
+class Ingredient extends Equatable {
+  const Ingredient({
     this.quantity = '',
     this.name = '',
     this.unit = '',
@@ -16,9 +16,9 @@ class Ingredients extends Equatable {
     this.productId = 0,
   });
 
-  factory Ingredients.fromJson(Map<String, dynamic> json) =>
-      _$IngredientsFromJson(json);
-  Map<String, dynamic> toJson() => _$IngredientsToJson(this);
+  factory Ingredient.fromJson(Map<String, dynamic> json) =>
+      _$IngredientFromJson(json);
+  Map<String, dynamic> toJson() => _$IngredientToJson(this);
 
   @HiveField(0)
   final String quantity;

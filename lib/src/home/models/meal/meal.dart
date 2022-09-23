@@ -1,4 +1,4 @@
-import 'package:dmk_home/src/home/models/ingredients/ingredients.dart';
+import 'package:dmk_home/src/home/models/ingredient/ingredient.dart';
 import 'package:dmk_home/src/home/models/meal_type/meal_type.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -15,7 +15,7 @@ class Meal extends Equatable {
     this.day = '',
     this.imageUrl = '',
     this.isROTD = 0,
-    this.rating = 0,
+    this.rating = '0',
     this.ratingCount = 0,
     this.mealTypeList = const [],
     this.ingredientsList = const [],
@@ -43,7 +43,7 @@ class Meal extends Equatable {
 
   @HiveField(5)
   @JsonKey(name: 'average_rating')
-  final int rating;
+  final String rating;
 
   @HiveField(6)
   @JsonKey(name: 'total_rating_count')
@@ -55,7 +55,7 @@ class Meal extends Equatable {
 
   @HiveField(8)
   @JsonKey(name: 'ingredients')
-  final List<Ingredients> ingredientsList;
+  final List<Ingredient> ingredientsList;
 
   static const empty = Meal();
 

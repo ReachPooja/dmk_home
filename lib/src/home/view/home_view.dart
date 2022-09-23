@@ -1,4 +1,7 @@
+import 'package:dmk_home/src/home/bloc/meal_bloc.dart';
+import 'package:dmk_home/src/home/models/meal/meal.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 const primaryColor = Color(0xff94c614);
 
@@ -44,68 +47,84 @@ class HomeView extends StatelessWidget {
       body: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
-          SizedBox(
-            height: screenWidth / 1.8,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                Image.asset(
-                  'assets/images/recipe.png',
-                  fit: BoxFit.cover,
-                ),
-                const DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.white,
-                        Colors.white60,
-                        Colors.white12,
-                        Colors.transparent,
-                        Colors.black12,
-                        Colors.black38,
-                        Colors.black54,
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 4, 8, 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+          BlocBuilder<MealBloc, MealState>(
+            buildWhen: (previous, current) =>
+                previous.popularRecipeStatus != current.popularRecipeStatus,
+            builder: (context, state) {
+              if (state.popularRecipeStatus == Status.success) {
+                final list = state.popularRecipeList
+                    .where((element) => element.isROTD == 1)
+                    .toList();
+                final recipeOfTheDay = list.isEmpty ? Meal.empty : list.first;
+                return SizedBox(
+                  height: screenWidth / 1.8,
+                  child: Stack(
+                    fit: StackFit.expand,
                     children: [
-                      const TitleText(
-                        title: 'Recipe of the day',
+                      if (recipeOfTheDay.imageUrl.isNotEmpty)
+                        Image.asset(
+                          recipeOfTheDay.imageUrl,
+                          fit: BoxFit.cover,
+                        ),
+                      const DecoratedBox(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.white,
+                              Colors.white60,
+                              Colors.white12,
+                              Colors.transparent,
+                              Colors.black12,
+                              Colors.black38,
+                              Colors.black54,
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
+                        ),
                       ),
-                      const Spacer(),
-                      Align(
-                        alignment: Alignment.bottomRight,
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 4, 8, 8),
                         child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            const Text(
-                              'Mixed Vegas Baked',
-                              style: TextStyle(
-                                color: Colors.white70,
-                                fontSize: 18,
-                              ),
+                            const TitleText(
+                              title: 'Recipe of the day',
                             ),
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: List.generate(
-                                5,
-                                (index) => Padding(
-                                  padding: const EdgeInsets.all(2),
-                                  child: CustomIcon(
-                                    imageUrl: 'star.png',
-                                    iconSize: 12,
-                                    iconColor: (index == 3 || index == 4)
-                                        ? Colors.white
-                                        : Colors.amber,
+                            const Spacer(),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    recipeOfTheDay.name,
+                                    style: const TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 18,
+                                    ),
                                   ),
-                                ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: List.generate(
+                                      5,
+                                      (index) => Padding(
+                                        padding: const EdgeInsets.all(2),
+                                        child: CustomIcon(
+                                          imageUrl: 'star.png',
+                                          iconSize: 12,
+                                          iconColor: (index + 1 >
+                                                  double.parse(
+                                                    recipeOfTheDay.rating,
+                                                  ))
+                                              ? Colors.white
+                                              : Colors.amber,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -113,9 +132,12 @@ class HomeView extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
           ),
           Container(
             margin: const EdgeInsets.symmetric(
@@ -202,46 +224,65 @@ class HomeView extends StatelessWidget {
           ),
           SizedBox(
             height: screenWidth / 2.4,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 4,
-              itemBuilder: (context, index) => Center(
-                child: SizedBox(
-                  width: screenWidth / 2.8,
-                  height: screenWidth / 2.8,
-                  child: Card(
-                    elevation: 8,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(6),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.asset(
-                                'assets/images/${popularRecipesList[index].imageUrl}',
-                                fit: BoxFit.cover,
+            child: BlocBuilder<MealBloc, MealState>(
+              buildWhen: (previous, current) =>
+                  previous.popularRecipeStatus != current.popularRecipeStatus,
+              builder: (context, state) {
+                if (state.popularRecipeStatus == Status.success) {
+                  return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.popularRecipeList.length,
+                    itemBuilder: (context, index) => Center(
+                      child: SizedBox(
+                        width: screenWidth / 2.8,
+                        height: screenWidth / 2.8,
+                        child: Card(
+                          margin: EdgeInsets.only(
+                            left: 12,
+                            right: index == (state.popularRecipeList.length - 1)
+                                ? 12
+                                : 0,
+                          ),
+                          elevation: 8,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(6),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.asset(
+                                      state.popularRecipeList[index].imageUrl,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 8, bottom: 8),
+                                child: Text(
+                                  state.popularRecipeList[index].name,
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8, bottom: 8),
-                          child: Text(
-                            popularRecipesList[index].label,
-                            style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              ),
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
             ),
           ),
           const CustomDivider(),
@@ -251,36 +292,56 @@ class HomeView extends StatelessWidget {
           ),
           SizedBox(
             height: screenWidth / 1.8,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 4,
-              itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.only(left: 12),
-                child: Column(
-                  children: [
-                    const Text(
-                      'Monday',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Flexible(
-                      child: Image.asset(
-                        'assets/images/meal1.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Bangus Sardines',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            child: BlocBuilder<MealBloc, MealState>(
+              buildWhen: (previous, current) =>
+                  previous.suggestedMealStatus != current.suggestedMealStatus,
+              builder: (context, state) {
+                if (state.suggestedMealStatus == Status.success) {
+                  return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.suggestedMealList.length,
+                    itemBuilder: (context, index) {
+                      final meal = state.suggestedMealList[index];
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          left: 12,
+                          right: index == (state.suggestedMealList.length - 1)
+                              ? 12
+                              : 0,
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              meal.day,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Flexible(
+                              child: Image.asset(
+                                meal.imageUrl,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              meal.name,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
             ),
           ),
           const CustomDivider(),
@@ -290,72 +351,101 @@ class HomeView extends StatelessWidget {
           ),
           SizedBox(
             height: screenWidth / 1.8,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 4,
-              itemBuilder: (context, index) => Center(
-                child: SizedBox(
-                  width: screenWidth / 2.3,
-                  height: screenWidth / 2,
-                  child: Card(
-                    elevation: 8,
-                    margin: const EdgeInsets.only(
-                      left: 12,
-                      top: 8,
-                      bottom: 8,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Stack(
-                              fit: StackFit.expand,
+            child: BlocBuilder<MealBloc, MealState>(
+              buildWhen: (previous, current) =>
+                  previous.contentStatus != current.contentStatus,
+              builder: (context, state) {
+                if (state.contentStatus == Status.success) {
+                  return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.contentList.length,
+                    itemBuilder: (context, index) {
+                      final content = state.contentList[index];
+                      return Center(
+                        child: SizedBox(
+                          width: screenWidth / 2.3,
+                          height: screenWidth / 2,
+                          child: Card(
+                            elevation: 8,
+                            margin: EdgeInsets.only(
+                              left: 12,
+                              top: 8,
+                              bottom: 8,
+                              right: index == (state.contentList.length - 1)
+                                  ? 12
+                                  : 0,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image.asset(
-                                  'assets/images/content1.png',
-                                  fit: BoxFit.cover,
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        Image.asset(
+                                          content.imageUrl,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        if (content.isArticle == 0)
+                                          const CustomIcon(
+                                            imageUrl: 'play.png',
+                                            iconColor: Colors.white,
+                                          ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                                const CustomIcon(
-                                  imageUrl: 'play.png',
-                                  iconColor: Colors.white,
+                                Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        content.name,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          height: 1.2,
+                                        ),
+                                      ),
+                                      if (content.isArticle == 1)
+                                        Text(
+                                          '${content.pages} pages',
+                                          style: const TextStyle(
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      const SizedBox(
+                                        height: 6,
+                                      ),
+                                      Text(
+                                        content.isArticle == 0
+                                            ? 'Lesson 1'
+                                            : 'Article',
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: const [
-                              Text(
-                                'How to make a better kitchen',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 6,
-                              ),
-                              Text(
-                                'Lesson 1',
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+                      );
+                    },
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
             ),
           ),
         ],

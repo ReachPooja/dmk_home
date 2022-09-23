@@ -38,14 +38,16 @@ class MealRepository {
 
       await box.put(contentBox, contentList);
     } catch (e) {
-      log(e.toString());
+      log(e.toString(), name: 'content');
     }
   }
 
   Future<void> savePopularRecipesData() async {
     try {
-      final response =
-          await rootBundle.loadString('api/popular_recipes_response.json');
+      final response = await rootBundle.loadString(
+        'api/popular_recipes_response.json',
+      );
+      log(response, name: 'response');
       final data = json.decode(response) as List;
       final box = Hive.box<List<dynamic>>(popularRecipesBox);
 
@@ -54,7 +56,7 @@ class MealRepository {
 
       await box.put(popularRecipesBox, recipesList);
     } catch (e) {
-      log(e.toString());
+      log(e.toString(), name: 'popular');
     }
   }
 
@@ -70,7 +72,7 @@ class MealRepository {
 
       await box.put(suggestedMealBox, mealList);
     } catch (e) {
-      log(e.toString());
+      log(e.toString(), name: 'suggested');
     }
   }
 
@@ -90,7 +92,7 @@ class MealRepository {
     final box = Hive.box<List<dynamic>>(popularRecipesBox);
     final data = box
         .get(
-          contentBox,
+          popularRecipesBox,
           defaultValue: <Meal>[],
         )!
         .cast<Meal>()
@@ -102,7 +104,7 @@ class MealRepository {
     final box = Hive.box<List<dynamic>>(suggestedMealBox);
     final data = box
         .get(
-          contentBox,
+          suggestedMealBox,
           defaultValue: <Meal>[],
         )!
         .cast<Meal>()

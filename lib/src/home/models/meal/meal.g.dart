@@ -22,10 +22,10 @@ class MealAdapter extends TypeAdapter<Meal> {
       day: fields[2] as String,
       imageUrl: fields[3] as String,
       isROTD: fields[4] as int,
-      rating: fields[5] as int,
+      rating: fields[5] as String,
       ratingCount: fields[6] as int,
       mealTypeList: (fields[7] as List).cast<MealType>(),
-      ingredientsList: (fields[8] as List).cast<Ingredients>(),
+      ingredientsList: (fields[8] as List).cast<Ingredient>(),
     );
   }
 
@@ -74,14 +74,14 @@ Meal _$MealFromJson(Map<String, dynamic> json) => Meal(
       day: json['day'] as String? ?? '',
       imageUrl: json['featured_image'] as String? ?? '',
       isROTD: json['is_recipe_of_the_day'] as int? ?? 0,
-      rating: json['average_rating'] as int? ?? 0,
+      rating: json['average_rating'] as String? ?? '0',
       ratingCount: json['total_rating_count'] as int? ?? 0,
       mealTypeList: (json['meal_type'] as List<dynamic>?)
               ?.map((e) => MealType.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       ingredientsList: (json['ingredients'] as List<dynamic>?)
-              ?.map((e) => Ingredients.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
     );
