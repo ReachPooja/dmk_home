@@ -1,3 +1,4 @@
+import 'package:dmk_home/l10n/l10n.dart';
 import 'package:dmk_home/src/home/bloc/meal_bloc.dart';
 import 'package:dmk_home/src/home/models/meal/meal.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,16 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final screenWidth = MediaQuery.of(context).size.width;
+
+    final navigationBarItems = <ImageWithName>[
+      ImageWithName(label: l10n.navBarItem1, imageUrl: 'plan.png'),
+      ImageWithName(label: l10n.navBarItem2, imageUrl: 'cook_now.png'),
+      ImageWithName(label: l10n.navBarItem3, imageUrl: 'home.png'),
+      ImageWithName(label: l10n.navBarItem4, imageUrl: 'learn.png'),
+      ImageWithName(label: l10n.navBarItem5, imageUrl: 'shop.png'),
+    ];
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -23,9 +33,9 @@ class HomeView extends StatelessWidget {
             iconColor: Colors.black,
           ),
         ),
-        title: const Text(
-          'Kitchenomics',
-          style: TextStyle(
+        title: Text(
+          l10n.homeAppBarTitle,
+          style: const TextStyle(
             color: primaryColor,
           ),
         ),
@@ -88,8 +98,8 @@ class HomeView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            const TitleText(
-                              title: 'Recipe of the day',
+                            TitleText(
+                              title: l10n.headerTitle,
                             ),
                             const Spacer(),
                             Align(
@@ -172,18 +182,18 @@ class HomeView extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
-                            'Find the recipes\nbased on what',
-                            style: TextStyle(
+                            l10n.secondaryHeaderTitle,
+                            style: const TextStyle(
                               color: Colors.white70,
                               fontSize: 18,
                               height: 1.3,
                             ),
                           ),
                           Text(
-                            'YOU HAVE AT HOME',
-                            style: TextStyle(
+                            l10n.secondaryHeaderSubtitle,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
@@ -218,9 +228,9 @@ class HomeView extends StatelessWidget {
             ),
           ),
           const CustomDivider(),
-          const TitleButtonTile(
-            label: 'Popular Recipes',
-            buttonLabel: 'All Recipes',
+          TitleButtonTile(
+            label: l10n.popularRecepiesTitle,
+            buttonLabel: l10n.popularRecepiesActionTitle,
           ),
           SizedBox(
             height: screenWidth / 2.4,
@@ -286,9 +296,9 @@ class HomeView extends StatelessWidget {
             ),
           ),
           const CustomDivider(),
-          const TitleButtonTile(
-            label: 'Suggested Meal Plan',
-            buttonLabel: 'Meal Planner',
+          TitleButtonTile(
+            label: l10n.suggestedMealTitle,
+            buttonLabel: l10n.suggestedMealActionTitle,
           ),
           SizedBox(
             height: screenWidth / 1.8,
@@ -345,9 +355,9 @@ class HomeView extends StatelessWidget {
             ),
           ),
           const CustomDivider(),
-          const TitleButtonTile(
-            label: 'Suggested Contents',
-            buttonLabel: 'View All',
+          TitleButtonTile(
+            label: l10n.suggestedContentsTitle,
+            buttonLabel: l10n.suggestedContentsActionTitle,
           ),
           SizedBox(
             height: screenWidth / 1.8,
@@ -512,7 +522,9 @@ class TitleButtonTile extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          TitleText(title: label),
+          Flexible(
+            child: TitleText(title: label),
+          ),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
             decoration: BoxDecoration(
@@ -564,14 +576,6 @@ class ImageWithName {
   final String label;
   final String imageUrl;
 }
-
-final navigationBarItems = <ImageWithName>[
-  ImageWithName(label: 'Plan', imageUrl: 'plan.png'),
-  ImageWithName(label: 'Cook Now', imageUrl: 'cook_now.png'),
-  ImageWithName(label: 'Home', imageUrl: 'home.png'),
-  ImageWithName(label: 'Learn', imageUrl: 'learn.png'),
-  ImageWithName(label: 'Shop', imageUrl: 'shop.png'),
-];
 
 final popularRecipesList = <ImageWithName>[
   ImageWithName(label: 'Taba ng talangka', imageUrl: 'recipe1.png'),
