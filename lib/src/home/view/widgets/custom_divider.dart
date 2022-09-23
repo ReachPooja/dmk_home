@@ -10,6 +10,7 @@ class CustomDivider extends StatelessWidget {
     return const Divider(
       indent: 12,
       endIndent: 12,
+      thickness: 1,
     );
   }
 }
