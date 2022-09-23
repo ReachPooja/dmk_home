@@ -1,0 +1,28 @@
+[
+    {
+        "id": 3001,
+        "name": "How to make a better kitchen",
+        "featured_image": "assets/images/content1.png",
+        "is_article": 0
+    },
+    {
+        "id": 3002,
+        "name": "Forest Feast",
+        "featured_image": "assets/images/content2.png",
+        "is_article": 1,
+        "total_pages": 123
+    },
+    {
+        "id": 3003,
+        "name": "How to make a better kitchen",
+        "featured_image": "assets/images/content3.png",
+        "is_article": 0
+    },
+    {
+        "id": 3004,
+        "name": "Forest Feast",
+        "featured_image": "assets/images/content2.png",
+        "is_article": 1,
+        "total_pages": 100
+    }
+]
