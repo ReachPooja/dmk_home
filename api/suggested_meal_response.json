@@ -1,0 +1,375 @@
+[
+    {
+        "id": 1001,
+        "day": "Monday",
+        "name": "Bangus Sardines",
+        "featured_image": "assets/images/meal1.png",
+        "is_recipe_of_the_day": 0,
+        "average_rating": "3.0",
+        "total_rating_count": 6,
+        "meal_type": [
+            {
+                "id": 13,
+                "name": "Rice",
+                "slug": "rice",
+                "featured_image": "pineapple_fried_rice.jpg"
+            }
+        ],
+        "ingredients": [
+            {
+                "quantity": "2",
+                "unit": "Tbsp",
+                "name": "oil",
+                "recipe_prefix": "",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "250",
+                "unit": "g",
+                "name": "longganisa, garlic",
+                "recipe_prefix": "longganisa, garlic, removed from casing",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "Tbsp",
+                "name": "garlic",
+                "recipe_prefix": "garlic, crushed",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "cup",
+                "name": "onion, red",
+                "recipe_prefix": "onion, red, sliced",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "pouch",
+                "name": "DEL MONTE Italian Style Spaghetti Sauce (250g)",
+                "recipe_prefix": "",
+                "serving_id": 706,
+                "product_id": 55
+            },
+            {
+                "quantity": "1/4",
+                "unit": "cup",
+                "name": "bell pepper, red",
+                "recipe_prefix": "bell pepper, red, diced",
+                "serving_id": 706,
+                "product_id": 0
+            }
+        ]
+    },
+    {
+        "id": 1002,
+        "day": "Tuesday",
+        "name": "Stir-Fried Tofu",
+        "featured_image": "assets/images/meal2.png",
+        "is_recipe_of_the_day": 0,
+        "average_rating": "3.0",
+        "total_rating_count": 6,
+        "meal_type": [
+            {
+                "id": 13,
+                "name": "Rice",
+                "slug": "rice",
+                "featured_image": "pineapple_fried_rice.jpg"
+            }
+        ],
+        "ingredients": [
+            {
+                "quantity": "2",
+                "unit": "Tbsp",
+                "name": "oil",
+                "recipe_prefix": "",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "250",
+                "unit": "g",
+                "name": "longganisa, garlic",
+                "recipe_prefix": "longganisa, garlic, removed from casing",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "Tbsp",
+                "name": "garlic",
+                "recipe_prefix": "garlic, crushed",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "cup",
+                "name": "onion, red",
+                "recipe_prefix": "onion, red, sliced",
+                "serving_id": 706,
+                "product_id": 0
+            }
+        ]
+    },
+    {
+        "id": 1003,
+        "day": "Wednesday",
+        "name": "Bangus Sardines",
+        "featured_image": "assets/images/meal1.png",
+        "is_recipe_of_the_day": 0,
+        "average_rating": "3.0",
+        "total_rating_count": 6,
+        "meal_type": [
+            {
+                "id": 13,
+                "name": "Rice",
+                "slug": "rice",
+                "featured_image": "pineapple_fried_rice.jpg"
+            }
+        ],
+        "ingredients": [
+            {
+                "quantity": "2",
+                "unit": "Tbsp",
+                "name": "oil",
+                "recipe_prefix": "",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "250",
+                "unit": "g",
+                "name": "longganisa, garlic",
+                "recipe_prefix": "longganisa, garlic, removed from casing",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "Tbsp",
+                "name": "garlic",
+                "recipe_prefix": "garlic, crushed",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "cup",
+                "name": "onion, red",
+                "recipe_prefix": "onion, red, sliced",
+                "serving_id": 706,
+                "product_id": 0
+            }
+        ]
+    },
+    {
+        "id": 1004,
+        "day": "Thursday",
+        "name": "Stir-Fried Tofu",
+        "featured_image": "assets/images/meal2.png",
+        "is_recipe_of_the_day": 0,
+        "average_rating": "3.0",
+        "total_rating_count": 6,
+        "meal_type": [
+            {
+                "id": 13,
+                "name": "Rice",
+                "slug": "rice",
+                "featured_image": "pineapple_fried_rice.jpg"
+            }
+        ],
+        "ingredients": [
+            {
+                "quantity": "2",
+                "unit": "Tbsp",
+                "name": "oil",
+                "recipe_prefix": "",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "250",
+                "unit": "g",
+                "name": "longganisa, garlic",
+                "recipe_prefix": "longganisa, garlic, removed from casing",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "Tbsp",
+                "name": "garlic",
+                "recipe_prefix": "garlic, crushed",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "cup",
+                "name": "onion, red",
+                "recipe_prefix": "onion, red, sliced",
+                "serving_id": 706,
+                "product_id": 0
+            }
+        ]
+    },
+    {
+        "id": 1005,
+        "day": "Friday",
+        "name": "Pine-Sit Canton",
+        "featured_image": "assets/images/meal1.png",
+        "is_recipe_of_the_day": 0,
+        "average_rating": "3.0",
+        "total_rating_count": 6,
+        "meal_type": [
+            {
+                "id": 13,
+                "name": "Rice",
+                "slug": "rice",
+                "featured_image": "pineapple_fried_rice.jpg"
+            }
+        ],
+        "ingredients": [
+            {
+                "quantity": "2",
+                "unit": "Tbsp",
+                "name": "oil",
+                "recipe_prefix": "",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "250",
+                "unit": "g",
+                "name": "longganisa, garlic",
+                "recipe_prefix": "longganisa, garlic, removed from casing",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "Tbsp",
+                "name": "garlic",
+                "recipe_prefix": "garlic, crushed",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "cup",
+                "name": "onion, red",
+                "recipe_prefix": "onion, red, sliced",
+                "serving_id": 706,
+                "product_id": 0
+            }
+        ]
+    },
+    {
+        "id": 1006,
+        "day": "Saturday",
+        "name": "Classic Caldereta",
+        "featured_image": "assets/images/meal2.png",
+        "is_recipe_of_the_day": 0,
+        "average_rating": "3.0",
+        "total_rating_count": 6,
+        "meal_type": [
+            {
+                "id": 13,
+                "name": "Rice",
+                "slug": "rice",
+                "featured_image": "pineapple_fried_rice.jpg"
+            }
+        ],
+        "ingredients": [
+            {
+                "quantity": "2",
+                "unit": "Tbsp",
+                "name": "oil",
+                "recipe_prefix": "",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "250",
+                "unit": "g",
+                "name": "longganisa, garlic",
+                "recipe_prefix": "longganisa, garlic, removed from casing",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "Tbsp",
+                "name": "garlic",
+                "recipe_prefix": "garlic, crushed",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "cup",
+                "name": "onion, red",
+                "recipe_prefix": "onion, red, sliced",
+                "serving_id": 706,
+                "product_id": 0
+            }
+        ]
+    },
+    {
+        "id": 1007,
+        "day": "Sunday",
+        "name": "Bacalao",
+        "featured_image": "assets/images/meal2.png",
+        "is_recipe_of_the_day": 0,
+        "average_rating": "3.0",
+        "total_rating_count": 6,
+        "meal_type": [
+            {
+                "id": 13,
+                "name": "Rice",
+                "slug": "rice",
+                "featured_image": "pineapple_fried_rice.jpg"
+            }
+        ],
+        "ingredients": [
+            {
+                "quantity": "2",
+                "unit": "Tbsp",
+                "name": "oil",
+                "recipe_prefix": "",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "250",
+                "unit": "g",
+                "name": "longganisa, garlic",
+                "recipe_prefix": "longganisa, garlic, removed from casing",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "Tbsp",
+                "name": "garlic",
+                "recipe_prefix": "garlic, crushed",
+                "serving_id": 706,
+                "product_id": 0
+            },
+            {
+                "quantity": "1",
+                "unit": "cup",
+                "name": "onion, red",
+                "recipe_prefix": "onion, red, sliced",
+                "serving_id": 706,
+                "product_id": 0
+            }
+        ]
+    }
+]
